@@ -179,9 +179,8 @@ public final class AutoPlantHandler {
 
 		if (held.isEmpty()) {
 			if (config.showDebug()) {
-				AutomatedPlanting.LOGGER.info(
-						"[autoplant] no plantable item in {} (source={})",
-						config.seedSource, config.seedSource);
+				AutomatedPlanting.LOGGER.info("[autoplant] no plantable item on hand (seedSource={})",
+						config.seedSource);
 			}
 
 			return;

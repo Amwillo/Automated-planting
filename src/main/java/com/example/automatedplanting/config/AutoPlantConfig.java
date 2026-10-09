@@ -32,7 +32,7 @@ public final class AutoPlantConfig {
 		OCTAHEDRON
 	}
 
-	/** Whether to also plant one block below/above the feet level (3x3x3 instead of a flat slice). */
+	/** Where the seed items are taken from. */
 	public enum SeedSource {
 		/** Only the main hand is used. */
 		MAIN_HAND,
@@ -148,7 +148,7 @@ public final class AutoPlantConfig {
 			return loaded;
 		} catch (Exception e) {
 			// A broken config must not stop the mod from loading.
-			AutomatedPlanting.LOGGER.error("Could not read {}, using defaults", PATH, e);
+			AutomatedPlanting.LOGGER.error("Could not read {} ({}), using defaults", PATH, e.toString());
 
 			return new AutoPlantConfig();
 		}
@@ -220,7 +220,7 @@ public final class AutoPlantConfig {
 			Files.createDirectories(PATH.getParent());
 			Files.writeString(PATH, GSON.toJson(this), StandardCharsets.UTF_8);
 		} catch (IOException e) {
-			AutomatedPlanting.LOGGER.error("Could not write {}", PATH, e);
+			AutomatedPlanting.LOGGER.error("Could not write {} ({})", PATH, e.toString());
 		}
 	}
 
