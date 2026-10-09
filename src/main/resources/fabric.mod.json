@@ -3,9 +3,9 @@
 	"id": "automated_planting",
 	"version": "${version}",
 	"name": "Automated Planting",
-	"description": "Automatically plants the crop in your main or off hand onto nearby farmland, toggled with a key.",
+	"description": "Automatically plants the crop in your main or off hand onto nearby farmland, toggled with a key. AI-assisted development; see the README for details.",
 	"authors": [
-		"Example"
+		"Amwillo"
 	],
 	"contact": {},
 	"license": "CC0-1.0",
