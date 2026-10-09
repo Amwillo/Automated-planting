@@ -1,16 +1,5 @@
 # Automated Planting
 
-> **AI-assisted development notice**
->
-> This project — its code, configuration and documentation — was written by an AI
-> coding assistant (DeepSeek) working under human direction. A human specified the
-> required behaviour, made the design decisions, and reviewed, tested and revised the
-> result. The code is therefore AI-assisted rather than human-authored.
->
-> It is released under CC0-1.0, which waives copyright and related rights. If you need
-> to attribute it, crediting **Amwillo** as the publisher is the accurate choice; the
-> implementation itself was produced by an AI assistant.
-
 A Fabric mod for **Minecraft 26.1.2** that plants the crop in your hand onto nearby
 farmland automatically, while you walk. Switch it on and off with a key.
 
@@ -313,3 +302,17 @@ src/main/resources/
 ## License
 
 CC0-1.0. See [LICENSE](LICENSE).
+
+---
+
+## AI-assisted development notice
+
+This project — its code, configuration and documentation — was written by an AI coding
+assistant (DeepSeek) working under human direction. A human specified the required
+behaviour, made the design decisions, and reviewed, tested and revised the result. The
+code is therefore AI-assisted rather than human-authored.
+
+It is released under CC0-1.0, which waives copyright and related rights. If you need to
+attribute it, crediting **Amwillo** as the publisher is the accurate choice; the
+implementation itself was produced by an AI assistant.
+
