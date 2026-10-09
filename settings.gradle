@@ -1,0 +1,26 @@
+pluginManagement {
+	repositories {
+		// maven.fabricmc.net is very slow from some networks, so a mirror is tried
+		// first. It is restricted to the Fabric groups so that third-party Gradle
+		// plugins keep resolving from the official repositories below.
+		maven {
+			name = 'HanbingsProxy'
+			url = 'https://repository.hanbings.io/proxy'
+			content {
+				includeGroupByRegex 'net\\.fabricmc.*'
+			}
+		}
+		maven {
+			name = 'Fabric'
+			url = 'https://maven.fabricmc.net/'
+			content {
+				includeGroupByRegex 'net\\.fabricmc.*'
+			}
+		}
+		mavenCentral()
+		gradlePluginPortal()
+	}
+}
+
+// Should match your modid
+rootProject.name = 'automated_planting'

@@ -1,0 +1,118 @@
+plugins {
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+	id 'maven-publish'
+}
+
+version = project.version
+group = project.group
+
+base {
+	archivesName = project.archives_base_name
+}
+
+repositories {
+	// Loom adds the essential repositories to download Minecraft and libraries automatically.
+	// maven.fabricmc.net is extremely slow from some networks, so Fabric artifacts are
+	// pinned to a mirror of the same published artifacts with exclusiveContent, which
+	// takes precedence over every other repository for the matching groups.
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = 'HanbingsProxy'
+				url = 'https://repository.hanbings.io/proxy'
+			}
+		}
+		filter {
+			includeGroupByRegex 'net\\.fabricmc.*'
+			includeGroupByRegex 'org\\.spongepowered.*'
+		}
+	}
+
+	mavenCentral()
+
+	// Mod Menu is only needed to let the settings screen appear in the mod list, so it is
+	// a compile-time dependency only: the mod works fine without it installed.
+	maven {
+		name = 'Modrinth'
+		url = 'https://api.modrinth.com/maven'
+		content {
+			includeGroup 'maven.modrinth'
+		}
+	}
+}
+
+dependencies {
+	// Minecraft 26.1.2 is shipped unobfuscated. No obfuscation mappings are published
+	// for it, so no `mappings` dependency is declared at all.
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	// Fabric API. This is technically optional, but you probably want it anyway.
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+	// Compile-time only: the mod detects Mod Menu at runtime through an optional
+	// entrypoint, and simply does nothing when it is absent.
+	compileOnly "maven.modrinth:modmenu:${project.modmenu_version}"
+}
+
+loom {
+	// Client-only code (the key mapping) goes in src/client and is never loaded on a
+	// dedicated server.
+	splitEnvironmentSourceSets()
+
+	mods {
+		"automated_planting" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+}
+
+processResources {
+	def version = project.version
+	inputs.property "version", version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 25
+}
+
+java {
+	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+	// if it is present.
+	// If you remove this line, sources will not be generated.
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+}
+
+jar {
+	def projectName = project.name
+	inputs.property "projectName", projectName
+
+	from("LICENSE") {
+		rename { "${it}_$projectName" }
+	}
+}
+
+// configure the maven publication
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			from components.java
+		}
+	}
+
+	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+	repositories {
+		// Add repositories to publish to here.
+		// Notice: This block does NOT have the same function as the block in the top level.
+		// The repositories here will be used for publishing your artifact, not for
+		// retrieving dependencies.
+	}
+}

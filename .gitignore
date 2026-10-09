@@ -1,0 +1,30 @@
+# Gradle
+build/
+.gradle/
+build-logs/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Fabric Loom run directories (isolated from the real .minecraft)
+run/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+.vscode/
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Java
+hs_err_pid*
+replay_pid*
+
+# 本地打包产物
+dist/
