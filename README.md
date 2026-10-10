@@ -35,12 +35,20 @@ The `seedSource` setting decides this:
 `BOTH_HANDS` will not spend offhand items while your main hand can do the job, so the
 common “seeds in the offhand as a spare” setup behaves the way you would expect.
 
-### Where it runs
+### Do I need it on the server?
 
-The behaviour is **server-side**. The client only reports key presses and settings, so it
-works the same in single-player and on a server. When playing on a server, the mod must be
-installed on **both** sides — a client-only install shows the toggle message but plants
-nothing, because the server is the side that places blocks.
+**Yes.** The server is the side that plants. A client-only install does nothing at all.
+
+| Installed on | Result |
+|---|---|
+| Server only | Planting works for players who have it client-side. Players without it are unaffected, and the mod costs them nothing. |
+| Client only | **Nothing happens.** The key press is discarded before it leaves your machine — no message, no planting. |
+| Both | Works normally. This is the usual setup. |
+
+Why a client-only install is completely silent: the client checks whether the server
+accepts the mod's packet before sending it, and the “Auto-planting: ON/OFF” message is
+sent by the *server*, not the client. The settings screen still opens, but nothing can be
+saved, because the server owns the configuration.
 
 ---
 
